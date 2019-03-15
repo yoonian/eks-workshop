@@ -5,7 +5,7 @@
     <link>/monitoring/</link>
     <description>Recent content in Monitoring using Prometheus and Grafana on Amazon EKS Workshop</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>ko-kr</language>
     <lastBuildDate>Sun, 14 Oct 2018 09:27:46 -0400</lastBuildDate>
     
 	<atom:link href="/monitoring/index.xml" rel="self" type="application/rss+xml" />
