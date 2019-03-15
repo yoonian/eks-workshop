@@ -21,7 +21,7 @@ script:
   - git clone https://${GH_NAME}:${GH_TOKEN}@github.com/awskrug/eks-workshop.git --branch gh-pages .gh_dist
 # dist into ".gh_dist"
   - cd .gh_dist
-  - git rm -rf .
+  # - git rm -rf .
   - cp -r ../dist/* ./
 # push
   - git config user.email ${GH_EMAIL}
