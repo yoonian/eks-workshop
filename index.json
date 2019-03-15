@@ -802,7 +802,7 @@
 	"title": "Cleanup Scaling",
 	"tags": [],
 	"description": "",
-	"content": "INSTANCE_PROFILE_PREFIX=$(aws cloudformation describe-stacks | jq -r '.Stacks[].StackName' | grep eksctl-eksworkshop-eksctl-nodegroup) INSTANCE_PROFILE_NAME=$(aws iam list-instance-profiles | jq -r '.InstanceProfiles[].InstanceProfileName' | grep $INSTANCE_PROFILE_PREFIX) ROLE_NAME=$(aws iam get-instance-profile --instance-profile-name $INSTANCE_PROFILE_NAME | jq -r '.InstanceProfile.Roles[] | .RoleName') kubectl delete -f ~/environment/cluster-autoscaler/cluster_autoscaler.yml kubectl delete -f ~/environment/cluster-autoscaler/nginx.yaml rm -rf ~/environment/cluster-autoscaler aws iam delete-role-policy --role-name $ROLE_NAME --policy-name ASG-Policy-For-Worker kubectl delete hpa,svc php-apache kubectl delete deployment php-apache load-generator  "
+	"content": "kubectl delete -f ~/environment/cluster-autoscaler/cluster_autoscaler.yml kubectl delete -f ~/environment/cluster-autoscaler/nginx.yaml rm -rf ~/environment/cluster-autoscaler aws iam delete-role-policy --role-name $ROLE_NAME --policy-name ASG-Policy-For-Worker kubectl delete hpa,svc php-apache kubectl delete deployment php-apache load-generator  "
 },
 {
 	"uri": "/helm_root/helm_micro/rolling_back/",
@@ -1145,7 +1145,7 @@
 	"title": "Credits",
 	"tags": [],
 	"description": "",
-	"content": " Thanks to our wonderful contributors  for making Open Source a better place! .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }   @brentley 47 commits   @geremyCohen 25 commits   @oak2278 19 commits   @dalbhanj 10 commits   @rnzsgh 8 commits   @jpeddicord 6 commits   @buzzsurfr 6 commits   @nikipat 4 commits   @gmarchand 3 commits   @alexpulver 2 commits   @alexei-led 2 commits   @DocValerian 2 commits   @rasensio 2 commits   @johnstanfield 2 commits   @ocxo 1 commits   @sharmaanshul2102 1 commits   @bhean 1 commits   @ChanceLee0111 1 commits   @rebelthor 1 commits   @enghwa 1 commits   @feanil 1 commits   @GElkayam 1 commits   @geordan-hatech 1 commits   @itaysk 1 commits   @techsolx 1 commits   @jupp0r 1 commits   @kimsaabyepedersen 1 commits   @Lixxia 1 commits   @LiranBri 1 commits   @mreferre 1 commits   @mikesigs 1 commits   @tabern 1 commits   @nihooge 1 commits   @wolruf 1 commits   @ranrotx 1 commits   @shaiss 1 commits   @jennylover 1 commits   @sajee 1 commits   @obbaeiei 1 commits   @trevorrobertsjr 1 commits   @vjsikha 1 commits   @Oik741 1 commits   @algestam 1 commits   @auziel 1 commits   @barelnir 1 commits   @gearora 1 commits   @jaybarnes 1 commits   "
+	"content": " Thanks to our wonderful contributors  for making Open Source a better place! .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }  "
 },
 {
 	"uri": "/tabs-example/tabs/",

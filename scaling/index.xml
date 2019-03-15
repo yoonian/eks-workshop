@@ -59,7 +59,7 @@ cat &amp;lt;&amp;lt;EoF&amp;gt; ~/environment/cluster-autoscaler/nginx.yaml apiV
       <pubDate>Tue, 07 Aug 2018 08:30:11 -0700</pubDate>
       
       <guid>/scaling/cleanup/</guid>
-      <description>INSTANCE_PROFILE_PREFIX=$(aws cloudformation describe-stacks | jq -r &#39;.Stacks[].StackName&#39; | grep eksctl-eksworkshop-eksctl-nodegroup) INSTANCE_PROFILE_NAME=$(aws iam list-instance-profiles | jq -r &#39;.InstanceProfiles[].InstanceProfileName&#39; | grep $INSTANCE_PROFILE_PREFIX) ROLE_NAME=$(aws iam get-instance-profile --instance-profile-name $INSTANCE_PROFILE_NAME | jq -r &#39;.InstanceProfile.Roles[] | .RoleName&#39;) kubectl delete -f ~/environment/cluster-autoscaler/cluster_autoscaler.yml kubectl delete -f ~/environment/cluster-autoscaler/nginx.yaml rm -rf ~/environment/cluster-autoscaler aws iam delete-role-policy --role-name $ROLE_NAME --policy-name ASG-Policy-For-Worker kubectl delete hpa,svc php-apache kubectl delete deployment php-apache load-generator  </description>
+      <description>kubectl delete -f ~/environment/cluster-autoscaler/cluster_autoscaler.yml kubectl delete -f ~/environment/cluster-autoscaler/nginx.yaml rm -rf ~/environment/cluster-autoscaler aws iam delete-role-policy --role-name $ROLE_NAME --policy-name ASG-Policy-For-Worker kubectl delete hpa,svc php-apache kubectl delete deployment php-apache load-generator  </description>
     </item>
     
   </channel>
