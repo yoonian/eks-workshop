@@ -10,7 +10,7 @@ cache:
 before_script:
   - npm run theme
   - npm install
-  - npm run build
+  - npm run build-kr
 
 script:
 # enable error reporting to the console
