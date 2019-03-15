@@ -17,16 +17,15 @@ script:
   - set -e
 # cleanup ".gh_dist"
   - rm -rf .gh_dist
-  - mkdir .gh_dist
 # clone remote repo to "_site"
-  - git clone https://voyagerwoo:${GH_TOKEN}@github.com/awskrug/eks-workshop.git --branch gh-pages .gh_dist
+  - git clone https://${GH_NAME}:${GH_TOKEN}@github.com/awskrug/eks-workshop.git --branch gh-pages .gh_dist
 # dist into ".gh_dist"
-  - rm -rf .gh_dist/**
-  - cp -r dist/* .gh_dist/
-# push
   - cd .gh_dist
-  - git config user.email "voyagerwoo@gmail.com"
-  - git config user.name "voyagerwoo"
+  - git rm -rf .
+  - cp -r ../dist/* ./
+# push
+  - git config user.email ${GH_EMAIL}
+  - git config user.name ${GH_NAME}
   - git add --all
   - git commit -a -m "Travis \#$TRAVIS_BUILD_NUMBER"
   - git push --force origin master
