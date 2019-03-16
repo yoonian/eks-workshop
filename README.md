@@ -1,60 +1,40 @@
-master branch: ![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiUmYrQzlvK2JVYWloK3N5NFh5WUZNS1duYUtVeFN2eWJLNk9VdU9NdzdDdGtobldPcHBKYjdVQ0YxV0NQLzRZeXhWbkJVTkc2Ymd2TEpJblNYb1BraXFNPSIsIml2UGFyYW1ldGVyU3BlYyI6IjRObVVDcVUyb3JJUEFYQTciLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
-
-jenkinsworld branch: ![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiUmYrQzlvK2JVYWloK3N5NFh5WUZNS1duYUtVeFN2eWJLNk9VdU9NdzdDdGtobldPcHBKYjdVQ0YxV0NQLzRZeXhWbkJVTkc2Ymd2TEpJblNYb1BraXFNPSIsIml2UGFyYW1ldGVyU3BlYyI6IjRObVVDcVUyb3JJUEFYQTciLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=jenkinsworld)
-
-tigera branch: ![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiUmYrQzlvK2JVYWloK3N5NFh5WUZNS1duYUtVeFN2eWJLNk9VdU9NdzdDdGtobldPcHBKYjdVQ0YxV0NQLzRZeXhWbkJVTkc2Ymd2TEpJblNYb1BraXFNPSIsIml2UGFyYW1ldGVyU3BlYyI6IjRObVVDcVUyb3JJUEFYQTciLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=tigera)
+[![Build Status](https://travis-ci.org/awskrug/eks-workshop.svg?branch=master)](https://travis-ci.org/awskrug/eks-workshop)
 
 # eksworkshop
+https://awskrug.github.io/eks-workshop/
 
-### Setup:
+## 프로젝트 설정
+### 리포지토리 클론하기:
+```
+git clone https://github.com/awskrug/eks-workshop.git
+```
 
-#### Install Hugo:
-On a mac:
+### theme submodule 클론하기:
+```
+cd eksworkshop
+git submodule init
+git submodule update
+```
 
-`brew install hugo`
+### Node.js 그리고 npm 설치:
+링크 참고: https://www.npmjs.com/get-npm
 
-On Linux:
-  - Download from the releases page: https://github.com/gohugoio/hugo/releases/tag/v0.46
-  - Extract and save the executable to `/usr/local/bin`
+### node 패키지 설치:
+npm install
 
-#### Clone this repo:
-From wherever you checkout repos:
-`git clone git@github.com:aws-samples/eks-workshop.git` (or your fork)
+### 로컬 개발환경에서 실행하기:
+`npm run server-kr` 명령어로 개발 서버를 띄우고 http://localhost:8081에서 확인 가능
 
-#### Clone the theme submodule:
-`cd eksworkshop`
+`npm run build` 명령어로 `./public/` 경로에 정적 페이지 결과물이 빌드
 
-`git submodule init` ;
-`git submodule update`
+### 페이지 수정하기:
+개발 환경에서 페이지 수정하게 되면, 자동으로 변경된 페이지로 reload
 
-#### Install Node.js and npm:
-You can follow instructions from npm website: https://www.npmjs.com/get-npm
+### 자동 배포:
+[travis-ci](https://travis-ci.org/awskrug/eks-workshop)를 이용한 자동 배포
 
-#### Install node packages:
-`npm install`
+참고 링크 : https://github.com/awskrug/eks-workshop/blob/master/.travis.yml 
 
-#### Run Hugo locally:
-`npm run server`
-or
-`npm run drafts` to see stubbed in draft pages.
 
-`npm run build` will build your content locally and output to `./public/`
-
-`npm run test` will test the built content for bad links
-
-#### View Hugo locally:
-Visit http://localhost:1313/ to see the site.
-
-#### Making Edits:
-As you save edits to a page, the site will live-reload to show your changes.
-
-#### Auto Deploy:
-Any commits to master will auto build and deploy in a couple of minutes. You can see the currently
-deployed hash at the bottom of the menu panel.
-
-Any commits to a branch will auto build and deploy in a couple of minutes to a custom route named with the branch name. You can see the currently
-deployed hash at the bottom of the menu panel.
-An example is the "jenkinsworld" branch would be deployed to https://eksworkshop.com/jenkinsworld/
-
-note: shift-reload may be necessary in your browser to reflect the latest changes.
-
+### 한글화 작업중
+참고 링크 : [한글화 작업 방법 Wiki Page](https://github.com/awskrug/eks-workshop/wiki/%ED%95%9C%EA%B8%80%ED%99%94-%EC%9E%91%EC%97%85-%EB%B0%A9%EB%B2%95)
