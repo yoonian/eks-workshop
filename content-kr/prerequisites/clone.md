@@ -1,5 +1,5 @@
 ---
-title: "Clone the Service Repos"
+title: "실습 서비스 레포지토리 클론"
 chapter: false
 weight: 23
 ---
