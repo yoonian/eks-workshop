@@ -1,5 +1,5 @@
 ---
-title: "Data Plane"
+title: "데이터 플레인"
 date: 2018-10-03T10:18:27-07:00
 draft: false
 weight: 110
@@ -36,10 +36,10 @@ internet((internet))
   class kubectl orange;
 {{< /mermaid >}}
 
-* Made up of worker nodes
+* 작업 노드로 구성
 
-* kubelet: Acts as a conduit between the API server and the node
+* kubelet: API 서버와 노드 간에 연결 역할
 
-* kube-proxy: Manages IP translation and routing
+* kube-proxy: IP 변환과 라우팅 관리
 
-Check out [the official Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/components/#node-components) for a more in-depth explanation of data plane components.
+[쿠버네티스 공식 문서](https://kubernetes.io/docs/concepts/overview/components/#node-components)에서 데이터 플레인에 대해 더 깊이 있는 설명을 확인할 수 있습니다.
