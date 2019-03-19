@@ -1,10 +1,10 @@
 ---
-title: "Amazon EKS Workshop"
+title: "Amazon EKS 워크샵"
 chapter: true
 weight: 1
 ---
 
-<div style="text-align: center"><h2>Amazon EKS Workshop</h2></div>
+<div style="text-align: center"><h2>Amazon EKS 워크샵</h2></div>
 
 ![EKS](images/3-service-animated.gif)
 
