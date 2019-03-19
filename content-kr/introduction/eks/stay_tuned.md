@@ -5,6 +5,6 @@ draft: false
 weight: 160
 ---
 
-Stay tuned as we continue the journey with EKS in the next module!
+다음 모듈에서 EKS로 여행을 진행하며 계속 지켜봐주십시오!
 
-Always ask questions!  Feel free to ask them in person during this workshop, or any time on the official Kubernetes Slack channel accessible via http://slack.k8s.io/.
+질문은 늘 열려있습니다! 이 워크숍에서나 [공식 쿠버네티스 슬랙](http://slack.k8s.io/) 이나 [AWSKRUG 슬랙](http://slack.awskr.org/)에서 언제든지 직접 물어보십시오.
