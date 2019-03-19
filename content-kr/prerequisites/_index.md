@@ -1,5 +1,5 @@
 ---
-title: "Start the workshop..."
+title: "워크샵 준비하기"
 chapter: true
 weight: 10
 ---

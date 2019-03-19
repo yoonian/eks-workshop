@@ -1,7 +1,7 @@
 languageCode = "ko-kr"
 ignoreFiles = [ "\\.files/README.md$",  ]
 defaultContentLanguage = "ko"
-title = "Amazon EKS Workshop"
+title = "Amazon EKS 워크샵"
 theme = "learn"
 uglyurls = false
 googleAnalytics = "UA-44634850-4"
@@ -17,7 +17,7 @@ editURL = "https://github.com/aws-samples/eks-workshop/edit/master/content/"
 themeVariant = "mine"
 showVisitedLinks = false
 author = "Brent Langston"
-description = "Amazon EKS Workshop"
+description = "Amazon EKS 워크샵"
 disableSearch = false
 disableAssetsBusting = false
 disableLanguageSwitchingButton = true
