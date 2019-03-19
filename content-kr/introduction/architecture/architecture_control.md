@@ -1,5 +1,5 @@
 ---
-title: "Control Plane"
+title: "콘트롤 플레인"
 date: 2018-10-03T10:18:27-07:00
 draft: false
 weight: 100
@@ -29,12 +29,12 @@ kubectl{kubectl}
   class kubectl orange;
 {{< /mermaid >}}
 
-* One or More API Servers: Entry point for REST / kubectl
+* 1개 이상의 API 서버: kubectl 의 REST 진입점
 
-* etcd: Distributed key/value store
+* etcd: 분산 키/벨류 저장소
 
-* Controller-manager: Always evaluating current vs desired state
+* 콘트롤 매니저: 항상 현재 상태와 원하는 상태르 평가
 
-* Scheduler: Schedules pods to worker nodes
+* 스케줄러: 작업 노드에 파드를 스케줄링
 
-Check out [the official Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/components/#master-components) for a more in-depth explanation of control plane components.
+[쿠버네티스 공식 문서](https://kubernetes.io/docs/concepts/overview/components/#master-components)에서 콘트롤 플레인에 대해 더 깊이 있는 설명을 확인할 수 있습니다.
