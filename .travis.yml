@@ -11,25 +11,16 @@ cache:
   directories:
     - node_modules
 
-before_script:
+script:
   - npm run theme
   - npm install
   - npm run build-kr
 
-script:
-# enable error reporting to the console
-  - set -e
-# cleanup ".gh_dist"
-  - rm -rf .gh_dist
-# clone remote repo to "_site"
-  - git clone https://${GH_NAME}:${GH_TOKEN}@github.com/awskrug/eks-workshop.git --branch gh-pages .gh_dist
-# dist into ".gh_dist"
-  - cd .gh_dist
-  - git rm -rf .
-  - cp -r ../public/* ./
-# push
-  - git config user.email ${GH_EMAIL}
-  - git config user.name ${GH_NAME}
-  - git add --all
-  - git commit -a -m "Travis \#$TRAVIS_BUILD_NUMBER"
-  - git push --force origin gh-pages
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  local-dir: ./public
+  on:
+    branch: gh-pages
