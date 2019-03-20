@@ -1,10 +1,10 @@
 ---
-title: "Deploy the Example Microservices"
+title: "마이크로서비스 예제 배포"
 chapter: true
 weight: 31
 ---
 
-# Deploy the Example Microservices
+# 예제 마이크로 서비스를 배포해봅시다.
 
-![microservices](/images/crystal.svg)
+![마이크로 서비스](/images/crystal.svg)
 {{% children showhidden="false" %}}
