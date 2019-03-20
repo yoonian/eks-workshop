@@ -1,30 +1,33 @@
 ---
-title: "Deploy an Application on Spot"
+title: "스팟에 애플리케이션 배포하기"
 date: 2018-09-18T17:40:09-05:00
 weight: 30
 draft: false
 ---
 
-We are redesigning our Microservice example and want our frontend service to be deployed on Spot Instances when they are available. We will use Node Affinity in our manifest file to configure this.
+마이크로서비스 예제를 다시 설계합니다. 스팟 인스턴스가 사용 가능하다면 프론트앤드 서비스를 스팟에 배포하도록 합니다.
+이 설정을 위해서 매니패스트 파일에 노드 어피니티(Node Affinity) 설정을 이용할 것입니다.
 
-#### Configure Node Affinity and Tolerations
 
-Open the deployment manifest in your Cloud9 editor - **~/environment/ecsdemo-frontend/kubernetes/deployment.yaml**
+#### 노드 어피니티 및 톨러레이션 설정
 
-Edit the spec to configure NodeAffinity to **prefer** Spot Instances, but not **require** them. This will allow the pods to be scheduled on On-Demand nodes if no spot instances were available or correctly labelled.
+Cloud9 에디터에서 디플로이먼트 메니페스트 파일을 엽니다. **~/environment/ecsdemo-frontend/kubernetes/deployment.yaml**
 
-We also want to configure a toleration which will allow the pods to "tolerate" the taint that we configured on our EC2 Spot Instances.
+스펙을 편집하여 노트 어피니티를 스팟 인스턴스를 **필수(require)**가 아닌 **선호(prefer)**하도록 구성하십시오.
+이렇게 하면 사용 가능한 스팟 인스턴스가 없거나 올바르게 레이블 된 경우 온디맨드 노드에 파드를 스케줄 할 수 있습니다.
 
-For examples of Node Affinity, check this [**link**](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)
+또한 포드가 EC2 스팟 인스턴스에서 구성한 테인트를 "허용"할 수 있도록 톨러레이션(허용 범위)을 구성하려고 합니다.
 
-For examples of Taints and Tolerations, check this [**link**](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)
+노드 어피니티 예제는 다음 [**링크**](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)를 확인하세요.
 
-#### Challenge
+테인트와 톨러레이션 예제는 다음 [**링크**](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)를 확인하세요.
 
-**Configure Affinity and Toleration**
+#### 도전
 
-{{% expand "Expand here to see the solution"%}}
-Add this to your deployment file under spec.template.spec
+**어피니티와 톨러레이션 설정**
+
+{{% expand "솔루션을 보려면 여기를 펼치세요"%}}
+아래의 코드를 디플로이먼트 파일의 spec.template.spec 아래에 추가하세요.
 
 ```yaml
       affinity:
@@ -45,22 +48,22 @@ Add this to your deployment file under spec.template.spec
 ```
 
 {{% notice tip %}}
- We have provided a solution file below that you can use to compare.
+아래에 솔루션 파일이 있습니다. 직접 작성한 코드와 비교해보세요.
 {{% /notice %}}
 
 {{% /expand %}}
 
 {{%attachments title="Related files" pattern=".yml"/%}}
 
-#### Redeploy the Frontend on Spot
+#### 프론트앤드 서비스 스팟에 재배포
 
-First let's take a look at all pods deployed on Spot instances
+먼저 스팟 인스턴스에 배포된 모든 파드를 확인해보겠습니다.
 
 ```bash
  for n in $(kubectl get nodes -l lifecycle=Ec2Spot --no-headers | cut -d " " -f1); do kubectl get pods --all-namespaces  --no-headers --field-selector spec.nodeName=${n} ; done
 ```
 
-Now we will redeploy  our microservices with our edited Frontend Manifest
+이제 편집된 프론트앤드 메니페스트로 마이크로서비스를 재배포합니다.
 
 ```bash
 cd ~/environment/ecsdemo-frontend
@@ -76,7 +79,7 @@ kubectl apply -f kubernetes/service.yaml
 kubectl apply -f kubernetes/deployment.yaml
 ```
 
-We can again check all pods deployed on Spot Instances and should now see the frontend pods running on Spot instances
+스팟 인스턴스에 배포된 모드 파드를 확인할 수 있으며, 프론트앤드 파드가 스팟 인스턴스 위에서 실행되는 것을 볼 수 있습니다.
 
 ```bash
  for n in $(kubectl get nodes -l lifecycle=Ec2Spot --no-headers | cut -d " " -f1); do kubectl get pods --all-namespaces  --no-headers --field-selector spec.nodeName=${n} ; done
