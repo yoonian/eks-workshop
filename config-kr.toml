@@ -39,6 +39,7 @@ template_bucket = "eksworkshop.com"
     url = "/mu/"
     weight = -110
 
+
 [[menu.shortcuts]]
 name = "<i class='fas fa-bookmark'></i> More Resources"
 url = "/more_resources"
@@ -63,6 +64,11 @@ weight = 30
 name = "<i class='fas fa-envelope'></i> Have questions?"
 url = "mailto:eksworkshop@amazon.com"
 weight = 40
+
+[[menu.shortcuts]]
+name = "<i class='fab fa-facebook'></i> AWS Korea User Group"
+url = "https://www.facebook.com/groups/awskrug/"
+weight = 50
 
 
 [outputs]
