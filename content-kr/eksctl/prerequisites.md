@@ -1,5 +1,5 @@
 ---
-title: "Prerequisites"
+title: "준비하기"
 date: 2018-08-07T13:31:55-07:00
 weight: 10
 ---

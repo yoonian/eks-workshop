@@ -1,5 +1,5 @@
 ---
-title: "Launch EKS"
+title: "EKS 실행"
 date: 2018-08-07T13:34:24-07:00
 weight: 20
 ---
