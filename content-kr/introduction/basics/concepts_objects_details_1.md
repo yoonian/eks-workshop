@@ -11,5 +11,5 @@ weight: 60
 ### [데몬셋(DaemonSet)](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
 * 워커 노드에 파드의 단일 인스턴스를 실행합니다.
 
-### [배포(Deployment)](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+### [디플로이먼트(Deployment)](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 * 어플리케이션 버전의 롤아웃(또는 롤백) 방법에 대한 세부내용.
