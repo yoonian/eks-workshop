@@ -8,8 +8,6 @@ draft: false
 이미 EKS 클러스터와 작업자 노드가 있지만 작업자로 구성된 일부 스팟 인스턴스가 필요합니다.
 또한 지능적인 스케줄링 결정을 내릴 수 있도록 스팟(Spot)과 주문형(On-Demand)을 식별하는 노드 레이블링 전략이 필요합니다.
 [AWS CloudFormation](https://aws.amazon.com/cloudformation/)을 사용하여 EKS 클러스터에 연결할 새 작업 노드를 시작합니다.
-
-This template will create a single ASG that leverages the latest feature to mix multiple instance types and purchase as a single K8s nodegroup.
 이 템플릿은 여러 인스턴스 유형으로 구성된 단일 k8s 노드 그룹을 구매하는 최신 기능을 최대한 활용하는 ASG(Auto Scaling Group)를 생성합니다.
 다음 블로그를 확인하세요: [New – EC2 Auto Scaling Groups With Multiple Instance Types & Purchase Options](https://aws.amazon.com/tw/blogs/aws/new-ec2-auto-scaling-groups-with-multiple-instance-types-purchase-options/) for details.
 
@@ -66,10 +64,8 @@ CloudFormation 템플릿을 새로운 작업자 노드 집합으로 실행하지
 
 {{% notice tip %}}
 클러스터가 있는 위치에 맞는 리전인지 확인하세요.
-Confirm the region is correct based on where you've deployed your cluster.
 {{% /notice %}}
 콘솔이 열리면 매개 변수를 입력해야합니다. 아래 표를 참조하십시오.
-Once the console is open you will need to configure the missing parameters. Use the table below for guidance.
 
 | Parameter | Value |
 |-----------|-------|
@@ -99,7 +95,7 @@ EKS Bootstrap.sh 스크립트는 우리가 사용하고있는 EKS Optimized AMI�
 **AWS CloudFormation이 IAM 리소스를 생성 할 수 있음을 확인합니다** 옆의 체크박스를 선택하고 **Create**를 클릭하십시오.
 
 {{% notice info %}}
-The creation of the workers will take about 3 minutes.
+워커 생성에는 약 3분이 소요됩니다.
 {{% /notice %}}
 
 #### 노드 확인
