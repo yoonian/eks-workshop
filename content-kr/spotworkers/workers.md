@@ -1,26 +1,30 @@
 ---
-title: "Add EC2 Workers - On-Demand and Spot"
+title: "EC2 워커 추가하기 - 온디맨드 그리고 스팟 EC2"
 date: 2018-08-07T11:05:19-07:00
 weight: 10
 draft: false
 ---
 
-We have our EKS Cluster and worker nodes already, but we need some Spot Instances configured as workers. We also need a Node Labeling strategy to identify which instances are Spot and which are on-demand so that we can make more intelligent scheduling decisions. We will use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to launch new worker
-nodes that will connect to the EKS cluster.
+이미 EKS 클러스터와 작업자 노드가 있지만 작업자로 구성된 일부 스팟 인스턴스가 필요합니다.
+또한 지능적인 스케줄링 결정을 내릴 수 있도록 스팟(Spot)과 주문형(On-Demand)을 식별하는 노드 레이블링 전략이 필요합니다.
+[AWS CloudFormation](https://aws.amazon.com/cloudformation/)을 사용하여 EKS 클러스터에 연결할 새 작업 노드를 시작합니다.
 
-This template will create a single ASG that leverages the latest feature to mix multiple instance types and purchase as a single K8s nodegroup. Check out this blog: [New – EC2 Auto Scaling Groups With Multiple Instance Types & Purchase Options](https://aws.amazon.com/tw/blogs/aws/new-ec2-auto-scaling-groups-with-multiple-instance-types-purchase-options/) for details.
+This template will create a single ASG that leverages the latest feature to mix multiple instance types and purchase as a single K8s nodegroup.
+이 템플릿은 여러 인스턴스 유형으로 구성된 단일 k8s 노드 그룹을 구매하는 최신 기능을 최대한 활용하는 ASG(Auto Scaling Group)를 생성합니다.
+다음 블로그를 확인하세요: [New – EC2 Auto Scaling Groups With Multiple Instance Types & Purchase Options](https://aws.amazon.com/tw/blogs/aws/new-ec2-auto-scaling-groups-with-multiple-instance-types-purchase-options/) for details.
 
-#### Retrieve the Worker Role name
+#### 워커의 역할 이름 조회
 
-First, we will need to collect the Role Name that is in use with our EKS worker nodes
+먼저 EKS 워커 노드에서 사용중인 역할 이름을 가져옵니다.
 
 ```bash
 echo $ROLE_NAME
 ```
 
-Copy the Role Name for use as a Parameter in the next step. If you receive an error or empty response, expand the steps below to export.
+다음 단계에서 매개 변수로 사용할 역할 이름을 복사하세요.
+오류 또는 빈 응답이 표시되면 아래의 단계를 펼쳐서 명령을 수행하고 다시 역할 이름을 가져옵니다.
 
-{{%expand "Expand here if you need to export the Role Name" %}}
+{{%expand "역할 이름을 환경변수로 설정하려면 여기를 클릭하여 펼치세요" %}}
 
 ```bash
 INSTANCE_PROFILE_PREFIX=$(aws cloudformation describe-stacks | jq -r '.Stacks[].StackName' | grep eksctl-eksworkshop-eksctl-nodegroup)
@@ -36,8 +40,8 @@ echo "export ROLE_NAME=${ROLE_NAME}" >> ~/.bash_profile
 eksctl-eksworkshop-eksctl-nodegro-NodeInstanceRole-XXXXXXXX
 ```
 
-#### Retrieve the Security Group Name
-We also need to collect the ID of the security group used with the existing worker nodes.
+#### 보안 그룹 이름 조회
+또한 기존 워커 노드와 함께 사용되는 보안 그룹의 ID를 수집해야합니다.
 
 ```bash
 STACK_NAME=$(aws cloudformation describe-stacks | jq -r '.Stacks[].StackName' | grep eksctl-eksworkshop-eksctl-nodegroup)
@@ -50,19 +54,21 @@ echo $SG_ID
 sg-0d9fb7e709dff5675
 ```
 
-#### Launch the CloudFormation Stack
+#### CloudFormation 스택 실행
 
-We will launch the CloudFormation template as a new set of worker nodes, but it's also possible to update the nodegroup CloudFormation stack created by the *eksctl* tool.
+CloudFormation 템플릿을 새로운 작업자 노드 집합으로 실행하지만 **eksctl** 도구로 만든 노드 그룹의 CloudFormation 스택을 업데이트 할 수도 있습니다.
 
-Click the **Launch** button to create the CloudFormation stack in the AWS Management Console.
+**Launch** 버튼을 클릭하여 AWS Management Console에서 CloudFormation 스택을 생성합니다.
 
 | Launch template |  |  |
 | ------ |:------:|:--------:|
 | EKS Workers - Spot and On Demand |  {{% cf-launch "amazon-eks-nodegroup-with-mixed-instances.yml?stackName=eksworkshop-nodegroup-0" %}} | {{% cf-download "amazon-eks-nodegroup-with-mixed-instances.yml" %}}  |
 
 {{% notice tip %}}
+클러스터가 있는 위치에 맞는 리전인지 확인하세요.
 Confirm the region is correct based on where you've deployed your cluster.
 {{% /notice %}}
+콘솔이 열리면 매개 변수를 입력해야합니다. 아래 표를 참조하십시오.
 Once the console is open you will need to configure the missing parameters. Use the table below for guidance.
 
 | Parameter | Value |
@@ -81,36 +87,42 @@ Once the console is open you will need to configure the missing parameters. Use 
 |BootstrapArgumentsForOnDemand: | `--kubelet-extra-args --node-labels=lifecycle=OnDemand` |
 |BootstrapArgumentsForSpotFleet: | `--kubelet-extra-args '--node-labels=lifecycle=Ec2Spot --register-with-taints=spotInstance=true:PreferNoSchedule'` |
 
-#### What's going on with Bootstrap Arguments?
+#### 부트 스트랩 인자에 대한 이해
 
-The EKS Bootstrap.sh script is packaged into the EKS Optimized AMI that we are using, and only requires a single input, the **EKS Cluster name**. The bootstrap script supports setting any `kubelet-extra-args` at runtime. We have configured **node-labels** so that kubernetes knows what type of nodes we have provisioned. We set the **lifecycle** for the nodes as **OnDemand** or **Ec2Spot**. We are also [tainting](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) with **PreferNoSchedule** to prefer pods not be scheduled on Spot Instances. This is a “preference” or “soft” version of **NoSchedule** – the system will try to avoid placing a pod that does not tolerate the taint on the node, but it is not required.
+EKS Bootstrap.sh 스크립트는 우리가 사용하고있는 EKS Optimized AMI에 패키지되어 있으며 **EKS 클러스터 이름**과 같은 단일 입력 만 필요합니다.
+부트스트랩 스크립트는 런타임에 `kubelet-extra-args`를 설정하는 것을 지원합니다. 쿠버네티스가 프로비저닝한 노드의 유형을 알 수 있도록 **노드 레이블**을 구성했습니다.
+노드의 **수명주기**(레이블의 키값)를 온디맨드와 EC2스팟으로 설정했습니다.
+스팟 인스턴스에 포드가 스케줄되지 않는 것을 선호하기 때문에 [테인트](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)를 **PreferNoSchedule**으로 설정합니다.
+이것은 **NoSchedule**의 "소프트" 버전입니다. 시스템은 해당 노드에 파드를 위치시키는 것을 최대한 피하지만, 다른 곳에 위치시킬 수 없는 경우에는 위치시킬 수 있습니다.
 
-You can leave the rest of the default parameters as is and continue through the remaining CloudFormation screens. Check the box next to **I acknowledge that AWS CloudFormation might create IAM resources** and click **Create**
+나머지 기본 매개 변수는 그대로 두고 CloudFormation 화면을 계속 진행합니다.
+**AWS CloudFormation이 IAM 리소스를 생성 할 수 있음을 확인합니다** 옆의 체크박스를 선택하고 **Create**를 클릭하십시오.
 
 {{% notice info %}}
 The creation of the workers will take about 3 minutes.
 {{% /notice %}}
 
-#### Confirm the Nodes
+#### 노드 확인
 
-Confirm that the new nodes joined the cluster correctly. You should see 2-3 more nodes added to the cluster.
+새 노드가 클러스터에 올바르게 결합되었는지 확인하세요. 클러스터에 추가 된 2-3 개의 노드가 추가로 표시되어야합니다.
 
 ```bash
 kubectl get nodes
 ```
 
 ![All Nodes](/images/spotworkers/spot_get_nodes.png)
-You can use the node-labels to identify the lifecycle of the nodes
+노드 레이블을 사용하여 노드의 수명주기를 식별 할 수 있습니다.
 
 ```bash
 kubectl get nodes --show-labels --selector=lifecycle=Ec2Spot
 ```
 
-The output of this command should return 2 nodes. At the end of the node output, you should see the node label **lifecycle=Ec2Spot**
+이 명령으로 2개의 노드 정보가 출력되어야 합니다. 노드 출력의 끝에서 노드 레이블 **lifecycle=Ec2Spot**을 볼 수 있습니다.
 
 ![Spot Output](/images/spotworkers/spot_get_spot.png)
 
-Now we will show all nodes with the **lifecycle=OnDemand**. The output of this command should return 1 node as configured in our CloudFormation template.
+
+이제 **lifecycle=OnDemand**로 모든 노드를 보여줍니다. 이 명령의 출력은 CloudFormation 템플릿에 구성된 대로 노드 1개를 반환해야합니다.
 
 ```bash
 kubectl get nodes --show-labels --selector=lifecycle=OnDemand
@@ -118,6 +130,5 @@ kubectl get nodes --show-labels --selector=lifecycle=OnDemand
 
 ![OnDemand Output](/images/spotworkers/spot_get_od.png)
 
-You can use the `kubectl describe nodes` with one of the spot nodes to see the taints applied to the EC2 Spot Instances.
-
+특정 spot 노드 중 하나를 `kubectl describe nodes` 명령어를 이용하여 EC2 스팟 인스턴스에 적용된 taints를 확인할 수 있습니다.
 ![Spot Taints](/images/spotworkers/instance_taints.png)
