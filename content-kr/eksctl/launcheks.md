@@ -6,7 +6,7 @@ weight: 20
 
 
 {{% notice warning %}}
-사용중인 Cloud9 IDE에서 [IAM 역할을 확인](./prerequisites/workspaceiam/#iam-역할-확인)하지 않았다면 **더 이상 진행하면 안됩니다**.
+사용중인 Cloud9 IDE에서 [IAM 역할을 확인](/prerequisites/workspaceiam/#iam-역할-확인)하지 않았다면 **더 이상 진행하면 안됩니다**.
 EKS 클러스터가 IAM 역할을 사용하여 빌드되지 않은 경우 나중 모듈에서 필요한 kubectl 명령을 실행할 수 없습니다.
 {{% /notice %}}
 
@@ -30,7 +30,7 @@ or
 }
 ```
 
-올바른 역할이 아니라면 [IAM 역할을 확인](./prerequisites/workspaceiam/#iam-역할-확인)으로 돌아가서 문제를 해결하세요.
+올바른 역할이 아니라면 [IAM 역할을 확인](/prerequisites/workspaceiam/#iam-역할-확인)으로 돌아가서 문제를 해결하세요.
 
 올바른 역할이 표시되면 다음 단계로 진행하여 EKS 클러스터를 만듭니다.
 {{% /expand %}}
