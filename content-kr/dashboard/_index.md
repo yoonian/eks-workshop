@@ -1,12 +1,12 @@
 ---
-title: "Deploy the Kubernetes Dashboard"
+title: "쿠버네티스 대시보드 배포"
 chapter: true
 weight: 30
 ---
 
-# Deploy the Kubernetes Dashboard
+# 쿠버네티스 대시보드를 배포합니다.
 
-In this Chapter, we will deploy the official Kubernetes dashboard, and connect
-through our Cloud9 Workspace.
+이번 장에서는 쿠버네티스 공식 대시보드를 배포하고, 
+귀하의 Clound9를 통해 접속합니다.
 
-![dashboard](/images/dashboard.png)
+![대시보드](/images/dashboard.png)
