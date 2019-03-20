@@ -1,19 +1,19 @@
 ---
-title: "K8s Objects Overview"
+title: "K8s 오브젝트 개요"
 date: 2018-10-03T10:15:55-07:00
 draft: false
 weight: 50
 ---
 
-Kubernetes objects are entities that are used to represent the state of the cluster.  
+쿠버네티스의 오브젝트(objects)는 클러스터의 상태를 나타내는 단위(entities)입니다.
 
-An object is a “record of intent” – once created, the cluster does its best to ensure it exists as defined.  This is known as the cluster’s “desired state.”
+오브젝트는 "의도를 담은 레코드"입니다. 생성된 클러스터는 그 의도대로 존재할 수 있도록 최선을 다합니다. 이는 클러스터의 "의도한 상태(desired state)"라고 알려져 있습니다.
 
-Kubernetes is always working to make an object’s “current state” equal to the object’s “desired state.”  A desired state can describe:
+쿠버네티스는 항상 오브젝트의 "현재 상태"를 "의도한 상태"와 동일하게 만들게끔 작동합니다. 이때 의도한 상태란 다음과 같습니다.
 
-* What pods (containers) are running, and on which nodes
-* IP endpoints that map to a logical group of containers
-* How many replicas of a container are running
-* And much more...
+* 어떤 파드(컨테이너)들이 어느 노드에서 동작(running) 중인지
+* 컨테이너들의 논리 그룹과 매핑된 IP 엔드포인트
+* 동작 중인 컨테이너 레플리카(replicas)의 개수
+* 기타 다수 상태들...
 
-Let’s explain these k8s objects in a bit more detail...
+k8s 오브젝트들에 대해 조금 더 자세히 알아봅시다...

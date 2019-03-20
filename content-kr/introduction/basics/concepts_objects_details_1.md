@@ -1,16 +1,15 @@
 ---
-title: "K8s Objects Detail (1/2)"
+title: "K8s 오브젝트 세부내용 (1/2)"
 date: 2018-10-03T10:15:55-07:00
 draft: false
 weight: 60
 ---
 
-### [Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
-* A thin wrapper around one or more containers
+### [파드(Pod)](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
+* 하나 이상의 컨테이너를 둘러싼 가장 작은 래퍼(wrapper) 단위.
 
-### [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+### [데몬셋(DaemonSet)](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+* 워커 노드에 파드의 단일 인스턴스를 실행합니다.
 
-* Implements a single instance of a pod on a worker node
-
-### [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-* Details how to roll out (or roll back) across versions of your application
+### [디플로이먼트(Deployment)](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+* 어플리케이션 버전의 롤아웃(또는 롤백) 방법에 대한 세부내용.
