@@ -1,16 +1,16 @@
 ---
-title: "Test the Cluster"
+title: "클러스터 테스트"
 date: 2018-08-07T13:36:57-07:00
 weight: 30
 ---
 
-Confirm your Nodes:
+노드 확인:
 
 ```bash
 kubectl get nodes
 ```
 
-Export the Worker Role Name for use throughout the workshop
+실습에 사용할 역할 이름을 환경변수로 설정하세요.
 
 ```bash
 INSTANCE_PROFILE_PREFIX=$(aws cloudformation describe-stacks | jq -r '.Stacks[].StackName' | grep eksctl-eksworkshop-eksctl-nodegroup)
@@ -20,6 +20,6 @@ echo "export ROLE_NAME=${ROLE_NAME}" >> ~/.bash_profile
 
 ```
 
-#### Congratulations!
+#### 축하합니다!
 
-You now have a fully working Amazon EKS Cluster that is ready to use!
+이제 사용할 준비가 완료된 Amazon EKS 클러스터를 갖게 되었습니다!
