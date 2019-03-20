@@ -16,8 +16,6 @@ Cloud9 에디터에서 디플로이먼트 메니페스트 파일을 엽니다. *
 스펙을 편집하여 노트 어피니티를 스팟 인스턴스를 **필수(require)**가 아닌 **선호(prefer)**하도록 구성하십시오.
 이렇게 하면 사용 가능한 스팟 인스턴스가 없거나 올바르게 레이블 된 경우 온디맨드 노드에 파드를 스케줄 할 수 있습니다.
 
-
-We also want to configure a toleration which will allow the pods to "tolerate" the taint that we configured on our EC2 Spot Instances.
 또한 포드가 EC2 스팟 인스턴스에서 구성한 테인트를 "허용"할 수 있도록 톨러레이션(허용 범위)을 구성하려고 합니다.
 
 노드 어피니티 예제는 다음 [**링크**](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)를 확인하세요.
@@ -81,7 +79,6 @@ kubectl apply -f kubernetes/service.yaml
 kubectl apply -f kubernetes/deployment.yaml
 ```
 
-We can again check all pods deployed on Spot Instances and should now see the frontend pods running on Spot instances
 스팟 인스턴스에 배포된 모드 파드를 확인할 수 있으며, 프론트앤드 파드가 스팟 인스턴스 위에서 실행되는 것을 볼 수 있습니다.
 
 ```bash
